@@ -130,14 +130,12 @@
       let helper = majorDiagonalColumnIndexAtFirstRow >= 0 ? majorDiagonalColumnIndexAtFirstRow : -majorDiagonalColumnIndexAtFirstRow
       // console.log(helper)
       let board = this.rows()
-
+      let helper1 = helper;
       // console.log(this.get('n'))
-      for (let i = majorDiagonalColumnIndexAtFirstRow <= 0 ? 0 : helper; i < this.get('n') - helper; i++) {
+      for (let i = 0; i < this.get('n') - helper; i++) {
         // console.log(i)
-        if (majorDiagonalColumnIndexAtFirstRow === 2) {
-          result += board[0][i]
-        }
-        const element = majorDiagonalColumnIndexAtFirstRow < 0 ? board[i + 1][i] : majorDiagonalColumnIndexAtFirstRow > 0 ? board[i][i + 1] : board[i][i]
+
+        const element = majorDiagonalColumnIndexAtFirstRow < 0 ? board[helper1++][i] : majorDiagonalColumnIndexAtFirstRow > 0 ? board[i][helper1++] : board[i][i]
 
         result += element;
       }
@@ -148,6 +146,11 @@
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function () {
+
+      for (var i = -3; i <= 3; i++) {
+        if (this.hasMajorDiagonalConflictAt(i)) return true
+      }
+
       return false; // fixme
     },
 
