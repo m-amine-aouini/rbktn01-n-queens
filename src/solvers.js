@@ -51,7 +51,7 @@ window.findNQueensSolution = function (n) {
   let solution = new Board(makeEmptyMatrix(n));
   if (n === 0) {
     solution.rows = function () {
-      return [[]];
+      return [[1]];
 
     }
     solution.get = function (n) {
@@ -59,9 +59,17 @@ window.findNQueensSolution = function (n) {
     }
   }
 
+  // let counter = 0;
+  // while (counter < solution.get('n')) {
+  //   let count = 0;
+  //   while (count < solution.get('n')) {
 
-  // for (let i = 0; i < board.length; i++) {
 
+  //     count++;
+  //   }
+
+
+  //   counter++;
   // }
 
 
