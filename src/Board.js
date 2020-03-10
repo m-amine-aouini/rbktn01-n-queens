@@ -140,7 +140,7 @@
         result += element;
       }
 
-      console.log(result)
+      // console.log(result)
       return result >= 2;
     },
 
@@ -161,11 +161,47 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function (minorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      if (minorDiagonalColumnIndexAtFirstRow === 6 || minorDiagonalColumnIndexAtFirstRow === 0) return false;
+      let result = 0;
+      let loopTime = 0;
+      let board = this.rows();
+
+      switch (minorDiagonalColumnIndexAtFirstRow) {
+        case 1: loopTime = 1;
+          break;
+        case 5: loopTime = 1;
+          break;
+        case 2: loopTime = 2;
+          break;
+        case 4: loopTime = 2;
+          break;
+        case 3: loopTime = 3;
+          break;
+
+      }
+      // console.log(minorDiagonalColumnIndexAtFirstRow)
+      let helper = minorDiagonalColumnIndexAtFirstRow >= 3 ? this.get('n') - 1 : loopTime;
+
+      for (let i = 0; i <= loopTime; i++) {
+        let help = minorDiagonalColumnIndexAtFirstRow === 5 ? i + 2 : i + 1
+
+        const element = minorDiagonalColumnIndexAtFirstRow === 3 ? board[i][helper--] :
+          minorDiagonalColumnIndexAtFirstRow > 3 ? board[help][helper--] :
+            board[helper--][i];
+
+        result += element;
+      }
+
+
+      return result >= 2; // fixme
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function () {
+      for (let i = 1; i < 6; i++) {
+        if (this.hasMinorDiagonalConflictAt(i)) return true;
+
+      }
       return false; // fixme
     }
 
